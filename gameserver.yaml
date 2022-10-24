@@ -1,0 +1,26 @@
+apiVersion: "agones.dev/v1"
+kind: GameServer
+metadata:
+  name: agones-ssh
+spec:
+  ports:
+  - name: agones-server
+    portPolicy: Dynamic
+    protocol: UDP
+    containerPort: 7654
+  - name: ssh
+    portPolicy: Dynamic
+    protocol: TCP
+    containerPort: 2222
+  template:
+    spec:
+      containers:
+      - name: ssh-game-server
+        image: gian2dchris/agones-ssh:latest
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "20m"
+          limits:
+            memory: "64Mi"
+            cpu: "20m"
